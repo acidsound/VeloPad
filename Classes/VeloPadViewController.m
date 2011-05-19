@@ -58,6 +58,11 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	if (touch) {
+		NSLog(@"%f", maxAccelX - minAccelX );
+		minAccelX = 0;
+		maxAccelX = 0;
+	}
 	touch = YES;
 }
 
@@ -72,11 +77,9 @@
 {
     // Get the current device angle
 	if (touch) {
-//		NSLog(@"%d / %d:%d:%d", prevAccel, [acceleration x], [acceleration y], [acceleration z]);
 		double accel = [acceleration y];
 		minAccelX = accel<minAccelX ? accel : minAccelX;
 		maxAccelX = accel>maxAccelX ? accel : maxAccelX;
-//		NSLog(@"%f/%f : %f", minAccelX, maxAccelX, accel);
 	}
 	
 	prevAccel = [acceleration x];
